@@ -1,12 +1,12 @@
 # Author: Harvey Ng
 # Description: Web scraper that searches the New York Road Runners' website for "9+1" volunteer
 # opportunities. Uses the Selenium Webdriver to navigate the website through the Firefox browser.
-# The opportunities are saved into a data.json file.
+# The opportunities are saved into a data.csv file.
 
 import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import json
+import pandas as pd
 
 
 # Open Firefox and go to NYRR volunteer opportunities page
@@ -56,9 +56,8 @@ for i in range(length):
     }
     list_of_events.append(dict_event)
 
-# Save the volunteer opportunities into a json file
-with open("data.json", "w") as f:
-    json.dump(list_of_events, f)
-
+# Save the volunteer opportunities into a csv file
+dataframe = pd.DataFrame(list_of_events)
+dataframe.to_csv("data.csv", index=False)
 
 
